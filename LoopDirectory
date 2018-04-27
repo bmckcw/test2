@@ -6,6 +6,7 @@ Public Sub LoopDirectory()
     Application.ScreenUpdating = False
 
     ‘Change to template directory
+    'THIS IS A NEW COMMENT
     vDirectory = "C:\Users\brian.mckenna\Documents\Adequate\"
 
     vfile = Dir(vDirectory & "*.docx")
