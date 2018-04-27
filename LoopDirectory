@@ -1,0 +1,38 @@
+Public Sub LoopDirectory()
+    Dim vDirectory As String
+    Dim oDoc As Document
+    Dim vfile As String
+    
+    Application.ScreenUpdating = False
+
+    ‘Change to template directory
+    vDirectory = "C:\Users\brian.mckenna\Documents\Adequate\"
+
+    vfile = Dir(vDirectory & "*.docx")
+
+    Do While vfile <> ""
+        Set oDoc = Documents.Open(FileName:=vDirectory & vfile)
+
+            Selection.Find.ClearFormatting
+            Selection.Find.Replacement.ClearFormatting
+            With Selection.Find
+                .Text = "The local area is also adequate served"
+                .Replacement.Text = "The local area is also adequately served"
+                .Forward = True
+                .Wrap = wdFindContinue
+                .Format = False
+                .MatchCase = False
+                .MatchWholeWord = False
+                .MatchWildcards = False
+                .MatchSoundsLike = False
+                .MatchAllWordForms = False
+            End With
+            Selection.Find.Execute Replace:=wdReplaceAll
+            ActiveDocument.Save
+            ActiveDocument.Close
+    
+        vfile = Dir
+    Loop
+    
+    Application.ScreenUpdating = True
+End Sub
